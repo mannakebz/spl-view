@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f8fc">
+    <meta name="robots" content="noindex, nofollow">
+    <title>League Admin — Master League</title>
+    <link rel="icon" type="image/png" href="./assets/master-league-logo.png">
+    <script src="./theme.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="./themes.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="./supabase-config.js" defer></script>
+    <script src="./league-data.js" defer></script>
+    <script src="./admin.js" defer></script>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header class="admin-topbar">
+        <a class="brand" href="./index.html">
+          <img src="./assets/master-league-logo.png" alt="">
+          <span>MASTER<span class="brand-accent">LEAGUE</span></span>
+        </a>
+        <a class="back-link" href="./index.html">Back to league</a>
+        <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark mode">
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.5A8.7 8.7 0 0 1 8.5 3.8a8.8 8.8 0 1 0 11.7 11.7Z"/></svg>
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+          <span class="theme-toggle-label">Dark mode</span>
+        </button>
+      </header>
+
+      <section class="admin-main" aria-labelledby="page-title">
+        <div class="admin-intro">
+          <p class="eyebrow">LEAGUE DESK / RESTRICTED</p>
+          <h1 id="page-title">League admin</h1>
+          <p>Sign in with an account approved by the league owner to update official results, player stats, and club rosters.</p>
+        </div>
+
+        <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
+
+        <form class="login-panel" id="login-form">
+          <label for="email">Admin email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <button class="primary-button" type="submit">Sign in securely</button>
+          <p>Admin accounts are created by the league owner. Public sign-up is not available.</p>
+        </form>
+
+        <section class="editor-panel" id="editor-panel" hidden>
+          <div class="editor-heading">
+            <div>
+              <span class="eyebrow" id="signed-in-email"></span>
+              <h2>Season 2026 data</h2>
+            </div>
+            <button class="quiet-button" id="sign-out" type="button">Sign out</button>
+          </div>
+
+          <section class="editor-section" aria-labelledby="results-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="results-heading">Match results</h3>
+                <p>Standings are calculated automatically from these full-time scores.</p>
+              </div>
+              <button class="quiet-button" id="add-result" type="button">Add match</button>
+            </div>
+            <div class="editor-list" id="results-editor"></div>
+          </section>
+
+          <section class="editor-section" aria-labelledby="rosters-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="rosters-heading">Club rosters</h3>
+                <p>Add up to 15 players to each club. Saved roster names appear on the public club cards.</p>
+              </div>
+            </div>
+            <div class="roster-editor-list" id="rosters-editor"></div>
+          </section>
+
+          <section class="editor-section" aria-labelledby="club-photos-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="club-photos-heading">Club photos</h3>
+                <p>Upload a team image or crest. JPG, PNG or WebP, up to 5 MB.</p>
+              </div>
+            </div>
+            <div class="club-photo-editor-list" id="club-photos-editor"></div>
+          </section>
+
+          <section class="editor-section" aria-labelledby="totw-editor-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="totw-editor-heading">Team of the week</h3>
+                <p>Select a week, formation and eleven players from the club rosters.</p>
+              </div>
+            </div>
+            <div class="totw-editor-controls">
+              <label class="editor-field">
+                <span class="field-label">Week</span>
+                <input id="totw-week" type="number" min="1" max="99" step="1" required>
+              </label>
+              <label class="editor-field">
+                <span class="field-label">Formation</span>
+                <select id="totw-formation">
+                  <option value="4-3-3">4-3-3</option>
+                  <option value="4-4-2">4-4-2</option>
+                  <option value="3-5-2">3-5-2</option>
+                </select>
+              </label>
+            </div>
+            <div class="totw-slot-editor" id="totw-slot-editor"></div>
+          </section>
+
+          <section class="editor-section" aria-labelledby="news-editor-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="news-editor-heading">League news</h3>
+                <p>New posts notify visitors who enabled push. JPG, PNG or WebP, up to 5 MB.</p>
+              </div>
+              <button class="quiet-button" id="add-news" type="button">Add news</button>
+            </div>
+            <div class="news-editor-list" id="news-editor"></div>
+          </section>
+
+          <section class="editor-section" aria-labelledby="scorers-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="scorers-heading">Goal scorers</h3>
+                <p>Maintain the official player goal totals.</p>
+              </div>
+              <button class="quiet-button" id="add-scorer" type="button">Add scorer</button>
+            </div>
+            <div class="editor-list compact-list" id="scorers-editor"></div>
+          </section>
+
+          <section class="editor-section" aria-labelledby="assists-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="assists-heading">Assists</h3>
+                <p>Leave this list empty until official assists are confirmed.</p>
+              </div>
+              <button class="quiet-button" id="add-assist" type="button">Add assist</button>
+            </div>
+            <div class="editor-list compact-list" id="assists-editor"></div>
+          </section>
+
+          <div class="save-row">
+            <span>Publish makes changes live. New posts also create a saved notification.</span>
+            <button class="primary-button" id="save-data" type="button">Publish changes</button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

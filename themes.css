@@ -1,0 +1,288 @@
+.theme-toggle {
+  display: inline-flex;
+  min-height: 36px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid #dce4f2;
+  border-radius: 9px;
+  background: #fff;
+  color: #3e506d;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 700;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+.theme-toggle:hover { border-color: #b9c8e2; background: #f3f7ff; }
+.theme-toggle:focus-visible { outline: 3px solid #4669ca; outline-offset: 3px; }
+.theme-icon { width: 15px; height: 15px; flex: 0 0 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+.theme-icon-sun { display: none; }
+.notification-toggle {
+  display: inline-flex;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid #dce4f2;
+  border-radius: 9px;
+  background: #fff;
+  color: #3e506d;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 700;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+.notification-toggle:hover { border-color: #b9c8e2; background: #f3f7ff; }
+.notification-toggle[aria-checked="true"] { border-color: #b8c7ea; background: #edf2ff; color: #3656b2; }
+.notification-toggle:disabled { cursor: not-allowed; opacity: .55; }
+.notification-toggle:focus-visible { outline: 3px solid #4669ca; outline-offset: 3px; }
+.notification-icon { width: 15px; height: 15px; flex: 0 0 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+.notification-status:not([hidden]) {
+  width: min(1320px, calc(100% - 48px));
+  margin: 8px auto;
+  padding: 9px 12px;
+  border: 1px solid #dce4f2;
+  border-radius: 9px;
+  background: #fff;
+  color: #3e506d;
+  font-size: 10px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #eef3ff;
+  --ink-soft: #dce6fb;
+  --paper: #0e1421;
+  --surface: #151e2d;
+  --surface-soft: #1b2638;
+  --muted: #aab8cf;
+  --line: #2b374b;
+  --gold: #9bb1ff;
+  --gold-deep: #7895ee;
+  --gold-highlight: #b9c8ff;
+  --muted-on-dark: #aab8cf;
+  --green: #8bc99c;
+  --panel-shadow: 0 18px 48px rgba(0, 0, 0, .22);
+}
+
+[data-theme="dark"],
+[data-theme="dark"] body { background: var(--paper); color: var(--ink); color-scheme: dark; }
+[data-theme="dark"] body {
+  background:
+    radial-gradient(ellipse at 79% 7%, rgba(44, 65, 112, .2), transparent 28rem),
+    var(--paper);
+}
+[data-theme="dark"] ::selection { color: #10182a; background: #a9bbff; }
+[data-theme="dark"] ::-webkit-scrollbar-track { background: #151e2d; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { border-color: #151e2d; background: #435574; }
+[data-theme="dark"] :focus-visible { outline-color: #a9bbff; }
+[data-theme="dark"] .skip-link { background: var(--surface); color: var(--ink); }
+
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .sidebar.is-open { border-color: #29364a; background: rgba(21, 30, 45, .97); color: var(--ink); }
+[data-theme="dark"] .brand { color: var(--ink); }
+[data-theme="dark"] .brand-accent,
+[data-theme="dark"] .mobile-brand .brand-accent { color: #a9bbff; }
+[data-theme="dark"] .nav-link { color: #b3c0d6; }
+[data-theme="dark"] .nav-link:hover { background: #26334a; color: #fff; }
+[data-theme="dark"] .nav-link.is-active { background: #29395a; color: #c7d4ff; }
+[data-theme="dark"] .sidebar .nav-caption { color: #9caec9; }
+[data-theme="dark"] .admin-link { color: #b8c6dd; text-decoration-color: #647493; }
+[data-theme="dark"] .admin-link:hover { color: #fff; }
+[data-theme="dark"] .header-cta { background: #7793e8; color: #111a2c; }
+[data-theme="dark"] .header-cta:hover { background: #9bb1ff; }
+[data-theme="dark"] .topbar { border-color: #263247; background: rgba(14, 20, 33, .92); }
+[data-theme="dark"] .breadcrumb,
+[data-theme="dark"] .breadcrumb > span:first-child { color: #bdc9dd; }
+[data-theme="dark"] .season-status { border-color: #315440; background: #172a22; color: #a6d3b2; }
+[data-theme="dark"] .data-status { background: #3a281c; color: #f0c9a5; }
+[data-theme="dark"] .menu-toggle { border-color: #34425a; background: #151e2d; }
+[data-theme="dark"] .menu-toggle span { background: #dce6fb; }
+[data-theme="dark"] .sidebar.is-open::after { background: rgba(2, 6, 14, .62); }
+
+[data-theme="dark"] .hero-copy-block h1 { color: #edf2ff; }
+[data-theme="dark"] .hero-copy-block > p { color: #bac8df; }
+[data-theme="dark"] .hero-secondary-link { color: #acbeff; }
+[data-theme="dark"] .hero-secondary-link:hover { color: #d2dcff; }
+[data-theme="dark"] .hero-link { border-color: #8199ed; background: #8199ed; color: #10182a; }
+[data-theme="dark"] .hero-link:hover { background: #a4b7ff; }
+[data-theme="dark"] .hero-link svg { color: #26365d; }
+[data-theme="dark"] .preview-stage::before { background: radial-gradient(ellipse, rgba(77, 105, 172, .24), rgba(30, 45, 76, .12) 48%, transparent 73%); }
+[data-theme="dark"] .desktop-preview,
+[data-theme="dark"] .phone-preview { border-color: #3a4961; background: #172235; }
+[data-theme="dark"] .preview-topbar { border-color: #34425a; background: rgba(24, 35, 54, .96); color: #dce6fb; }
+[data-theme="dark"] .preview-app-mark { border-color: #3a4961; background: #fff; }
+[data-theme="dark"] .preview-topbar small,
+[data-theme="dark"] .preview-heading span:last-child,
+[data-theme="dark"] .preview-table-head,
+[data-theme="dark"] .preview-foot { color: #aab8cf; }
+[data-theme="dark"] .preview-heading { color: #eef3ff; }
+[data-theme="dark"] .preview-standing-row { border-color: #34425a; color: #c2cde0; }
+[data-theme="dark"] .preview-standing-row.is-leader,
+[data-theme="dark"] .preview-team b { color: #eef3ff; }
+[data-theme="dark"] .preview-standing-row > strong { color: #a9bbff; }
+[data-theme="dark"] .phone-content { background: linear-gradient(145deg, #19263d, #101827); color: #eef3ff; }
+[data-theme="dark"] .phone-kicker,
+[data-theme="dark"] .phone-week,
+[data-theme="dark"] .phone-mini-stats span { color: #aab8cf; }
+[data-theme="dark"] .phone-scoreline { background: #1d2a41; }
+[data-theme="dark"] .phone-team b,
+[data-theme="dark"] .phone-scoreline > strong { color: #eef3ff; }
+[data-theme="dark"] .phone-mini-stats { border-color: #3a4961; }
+
+[data-theme="dark"] .stat-ribbon { border-color: var(--line); background: rgba(21, 30, 45, .88); }
+[data-theme="dark"] .stat-item { border-color: var(--line); }
+[data-theme="dark"] .stat-item strong { color: #c6d4ff; }
+[data-theme="dark"] .stat-item span,
+[data-theme="dark"] .stat-note { color: #b1bfd5; }
+[data-theme="dark"] .panel { border-color: #2b374b; background: rgba(21, 30, 45, .96); }
+[data-theme="dark"] .panel-heading h2,
+[data-theme="dark"] .top-scorer h2 { color: #eef3ff; }
+[data-theme="dark"] .panel-heading p { color: #aab8cf; }
+[data-theme="dark"] .segmented-control { border-color: #34425a; background: #1b2638; }
+[data-theme="dark"] .segment-button,
+[data-theme="dark"] .table-tab { color: #b5c3db; }
+[data-theme="dark"] .segment-button:hover,
+[data-theme="dark"] .table-tab:hover { color: #fff; }
+[data-theme="dark"] .segment-button.is-selected { background: #8199ed; color: #10182a; }
+[data-theme="dark"] .table-tab.is-selected { background: #29395a; color: #c7d4ff; }
+[data-theme="dark"] .fixture-card { border-color: #34425a; background: linear-gradient(145deg, #1b2638, #151e2d); }
+[data-theme="dark"] .fixture-card:hover { border-color: #52688f; background: #1c2940; }
+[data-theme="dark"] .fixture-top,
+[data-theme="dark"] .fixture-team,
+[data-theme="dark"] .fixture-score { color: #dce6fb; }
+[data-theme="dark"] .fixture-status { color: #a6d3b2; }
+[data-theme="dark"] .fixture-bottom { border-color: #34425a; color: #aab8cf; }
+[data-theme="dark"] .match-note { color: #b5c5ff; }
+[data-theme="dark"] .table-tabs,
+[data-theme="dark"] .league-table td,
+[data-theme="dark"] .scorer-row { border-color: #34425a; }
+[data-theme="dark"] .league-table th,
+[data-theme="dark"] .league-table td,
+[data-theme="dark"] .table-footnote,
+[data-theme="dark"] .scorer-rank,
+[data-theme="dark"] .scorer-club { color: #aab8cf; }
+[data-theme="dark"] .league-table tbody tr.leader-row td,
+[data-theme="dark"] .scorer-name { color: #eef3ff; }
+[data-theme="dark"] .league-table .points,
+[data-theme="dark"] .scorer-goals { color: #b9c8ff; }
+[data-theme="dark"] .top-scorer { border-color: #364766; background: linear-gradient(145deg, #1b2942, #172235); }
+[data-theme="dark"] .scorer-highlight { border-color: #3a4961; }
+[data-theme="dark"] .scorer-highlight > div strong { color: #eef3ff; }
+[data-theme="dark"] .scorer-highlight > div span,
+[data-theme="dark"] .scorer-note { color: #bac8df; }
+[data-theme="dark"] .club-card { border-color: #34425a; background: #1b2638; }
+[data-theme="dark"] .club-card:hover { border-color: #52688f; background: #202e45; }
+[data-theme="dark"] .club-city,
+[data-theme="dark"] .club-season-stats,
+[data-theme="dark"] .club-roster-count,
+[data-theme="dark"] .club-roster-empty { color: #b3c0d6; }
+[data-theme="dark"] .club-name,
+[data-theme="dark"] .club-season-stats strong,
+[data-theme="dark"] .club-roster ol { color: #e0e8f7; }
+[data-theme="dark"] .club-roster { border-color: #34425a; }
+[data-theme="dark"] .club-roster summary { color: #c0ceff; }
+[data-theme="dark"] .club-photo-banner,
+[data-theme="dark"] .news-photo { background: #202e45; }
+[data-theme="dark"] .player-profile,
+[data-theme="dark"] .news-item { border-color: #34425a; background: #1b2638; }
+[data-theme="dark"] .profile-portrait { background: #26344d; color: #c0ceff; }
+[data-theme="dark"] .profile-club,
+[data-theme="dark"] .profile-copy p,
+[data-theme="dark"] .profile-stat-line dt,
+[data-theme="dark"] .public-empty,
+[data-theme="dark"] .contribution-stat > span,
+[data-theme="dark"] .contribution-total > span { color: #b3c0d6; }
+[data-theme="dark"] .profile-copy h3,
+[data-theme="dark"] .profile-stat-line dd,
+[data-theme="dark"] .contribution-stat strong { color: #e8efff; }
+[data-theme="dark"] .profile-stat-line { border-color: #34425a; }
+[data-theme="dark"] .contribution-total strong,
+[data-theme="dark"] .totw-formation { color: #b9c8ff; }
+[data-theme="dark"] .totw-pitch { border-color: #345b48; background: #172b23; }
+[data-theme="dark"] .totw-player-photo { border-color: #d9e8dc; background: #294333; color: #e4f3e7; }
+[data-theme="dark"] .totw-player strong { color: #e4f3e7; }
+[data-theme="dark"] .totw-player > span:last-child { color: #b3d1bb; }
+[data-theme="dark"] .news-copy h3 { color: #eef3ff; }
+[data-theme="dark"] .news-copy p { color: #b3c0d6; }
+[data-theme="dark"] .join-strip { border-color: #344766; background: linear-gradient(105deg, #1b2942, #151e2d 72%); }
+[data-theme="dark"] .join-strip strong { color: #eef3ff; }
+[data-theme="dark"] .join-strip > div span,
+[data-theme="dark"] .page-footer,
+[data-theme="dark"] .page-footer > span:first-child { color: #aab8cf; }
+[data-theme="dark"] .join-strip a,
+[data-theme="dark"] .page-footer a { color: #b9c8ff; }
+[data-theme="dark"] .join-strip a:hover,
+[data-theme="dark"] .page-footer a:hover { color: #dce5ff; }
+[data-theme="dark"] .page-footer { border-color: #2b374b; }
+
+[data-theme="dark"] .admin-topbar { border-color: #2b374b; background: rgba(21, 30, 45, .94); }
+[data-theme="dark"] .back-link { color: #b9c8ff; }
+[data-theme="dark"] .admin-intro > p:last-child,
+[data-theme="dark"] .section-heading p,
+[data-theme="dark"] .save-row > span { color: #b3c0d6; }
+[data-theme="dark"] .eyebrow,
+[data-theme="dark"] .login-panel label,
+[data-theme="dark"] .field-label { color: #b7c5dd; }
+[data-theme="dark"] .admin-status:not(:empty) { border-color: #60442f; background: #38271d; color: #f0c9a5; }
+[data-theme="dark"] .admin-status.is-success { border-color: #345b48; background: #182d23; color: #b3d8bc; }
+[data-theme="dark"] .login-panel,
+[data-theme="dark"] .editor-panel { border-color: #2b374b; background: #151e2d; }
+[data-theme="dark"] .login-panel > p { color: #b3c0d6; }
+[data-theme="dark"] .login-panel input,
+[data-theme="dark"] .editor-field input,
+[data-theme="dark"] .editor-field select,
+[data-theme="dark"] .news-fields textarea { border-color: #3a4961; background: #101827; color: #eef3ff; color-scheme: dark; }
+[data-theme="dark"] .editor-row,
+[data-theme="dark"] .roster-editor-group,
+[data-theme="dark"] .club-photo-row,
+[data-theme="dark"] .news-editor-row { border-color: #34425a; background: #1b2638; }
+[data-theme="dark"] .roster-player-row { border-color: #34425a; background: #151e2d; }
+[data-theme="dark"] .roster-editor-count,
+[data-theme="dark"] .roster-empty { color: #b3c0d6; }
+[data-theme="dark"] .remove-row { color: #ffb1a2; }
+[data-theme="dark"] .remove-row:hover { background: #392923; }
+[data-theme="dark"] .primary-button { background: #8199ed; color: #10182a; }
+[data-theme="dark"] .primary-button:hover { background: #a4b7ff; }
+[data-theme="dark"] .quiet-button,
+[data-theme="dark"] .media-upload-button { border-color: #3a4961; background: #202e45; color: #dce6fb; }
+[data-theme="dark"] .quiet-button:hover,
+[data-theme="dark"] .media-upload-button:hover { background: #29395a; }
+[data-theme="dark"] .media-preview { border-color: #3a4961; background: #101827; }
+[data-theme="dark"] .media-placeholder { border-color: #52617a; color: #b3c0d6; }
+
+[data-theme="dark"] .theme-toggle { border-color: #3a4961; background: #1b2638; color: #dce6fb; }
+[data-theme="dark"] .theme-toggle:hover { border-color: #60749a; background: #26344c; }
+[data-theme="dark"] .theme-icon-moon { display: none; }
+[data-theme="dark"] .theme-icon-sun { display: block; }
+[data-theme="dark"] .notification-toggle { border-color: #3a4961; background: #1b2638; color: #dce6fb; }
+[data-theme="dark"] .notification-toggle:hover { border-color: #60749a; background: #26344c; }
+[data-theme="dark"] .notification-toggle[aria-checked="true"] { border-color: #52688f; background: #29395a; color: #c7d4ff; }
+[data-theme="dark"] .notification-status:not([hidden]) { border-color: #34425a; background: #151e2d; color: #dce6fb; }
+[data-theme="dark"] .notifications-section .panel-heading p,
+[data-theme="dark"] .notification-item p,
+[data-theme="dark"] .notification-item time { color: #aab8cf; }
+[data-theme="dark"] .notification-item { border-color: #2b374b; }
+[data-theme="dark"] .notification-item h3 { color: #dce6fb; }
+[data-theme="dark"] .notification-item a { color: #acbeff; }
+[data-theme="dark"] .notification-more { border-color: #3a4961; background: #1b2638; color: #acbeff; }
+[data-theme="dark"] .notification-more:hover { border-color: #60749a; background: #26344c; }
+
+@media (max-width: 560px) {
+  .theme-toggle { width: 36px; min-height: 36px; padding: 0; }
+  .theme-toggle-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+}
+
+@media (min-width: 901px) and (max-width: 1150px) {
+  .notification-toggle { width: 39px; padding: 0; }
+  .notification-toggle-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+}
+
+@media (max-width: 900px) {
+  .sidebar-actions .notification-toggle { justify-content: flex-start; min-height: 42px; padding: 0 12px; }
+  .notifications-section .notification-status:not([hidden]) { width: 100%; margin: 6px 0; }
+  .notifications-section { padding: 15px 12px; }
+}

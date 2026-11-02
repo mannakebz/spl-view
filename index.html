@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f9fc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Master League">
+    <meta name="description" content="Follow Master League results, standings, player profiles, Team of the Week and news for the 2026 season.">
+    <title>Master League — Season 2026</title>
+    <link rel="icon" type="image/png" href="./assets/master-league-logo.png">
+    <link rel="apple-touch-icon" href="./assets/master-league-logo.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <script src="./theme.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./themes.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-messaging-compat.js" defer></script>
+    <script src="./supabase-config.js" defer></script>
+    <script src="./firebase-config.js" defer></script>
+    <script src="./league-data.js" defer></script>
+    <script src="./app.js" defer></script>
+    <script src="./notifications.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="dashboard-shell">
+      <aside class="sidebar" id="league-sidebar" aria-label="League navigation">
+        <a class="brand" href="#home" aria-label="Master League overview">
+          <img src="./assets/master-league-logo.png" alt="">
+          <span>MASTER<span class="brand-accent">LEAGUE</span></span>
+        </a>
+
+        <p class="nav-caption">LEAGUE DESK</p>
+        <nav class="sidebar-nav" aria-label="League sections">
+          <a class="nav-link is-active" href="#home" aria-current="location">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10.5h-6v-6h-5v6h-6z"/></svg>
+            <span>Overview</span>
+          </a>
+          <a class="nav-link" href="#fixtures">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M8 3.5v3M16 3.5v3M3.5 9.5h17M8 13h2M14 13h2M8 16.5h2"/></svg>
+            <span>Matchdays</span>
+          </a>
+          <a class="nav-link" href="#standings">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V12h4v8M10 20V7h4v13M16 20V4h4v16M2.5 20.5h19"/></svg>
+            <span>Standings</span>
+          </a>
+          <a class="nav-link" href="#clubs">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.5"/><path d="M2.8 20v-1.5a5.2 5.2 0 0 1 10.4 0V20zM14 15.2a4.2 4.2 0 0 1 7.2 3v1.3h-6"/></svg>
+            <span>Clubs</span>
+          </a>
+          <a class="nav-link" href="#players">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0z"/></svg>
+            <span>Players</span>
+          </a>
+          <a class="nav-link" href="#team-of-week">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 14.5 8l5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9L9.5 8z"/></svg>
+            <span>Team of the week</span>
+          </a>
+          <a class="nav-link" href="#news">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>
+            <span>News</span>
+          </a>
+          <a class="nav-link" href="#notifications">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+            <span>Notifications</span>
+          </a>
+        </nav>
+        <div class="sidebar-actions">
+          <a class="admin-link" href="./admin.html">Admin sign in</a>
+          <a class="header-cta" href="#fixtures">View matchdays</a>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="league-sidebar" aria-label="Open league navigation">
+            <span></span><span></span>
+          </button>
+          <a class="mobile-brand" href="#home" aria-label="Master League overview">
+            <img src="./assets/master-league-logo.png" alt="">
+            <span>MASTER<span class="brand-accent">LEAGUE</span></span>
+          </a>
+          <p class="breadcrumb"><span>MASTER LEAGUE</span><span class="breadcrumb-divider">/</span> SEASON 2026</p>
+          <span class="season-status"><span class="status-dot" aria-hidden="true"></span> 2026 season</span>
+          <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark mode">
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.5A8.7 8.7 0 0 1 8.5 3.8a8.8 8.8 0 1 0 11.7 11.7Z"/></svg>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+            <span class="theme-toggle-label">Dark mode</span>
+          </button>
+        </header>
+        <p class="data-status" id="data-status" role="alert" hidden></p>
+
+        <main id="main">
+          <div class="page-content">
+            <section class="content-section overview-section" id="home" aria-labelledby="hero-title">
+              <section class="overview-hero" aria-labelledby="hero-title">
+                <div class="hero-copy-block">
+                  <h1 id="hero-title">The league,<br>in full view.</h1>
+                  <p>Matchdays, standings and every club’s season story — all in one place.</p>
+                  <div class="hero-actions">
+                    <a class="hero-link" href="#fixtures">Explore matchdays <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10h12M10 4.5 15.5 10 10 15.5"/></svg></a>
+                    <a class="hero-secondary-link" href="#standings">View standings</a>
+                  </div>
+                </div>
+                <div class="preview-stage" aria-hidden="true">
+                  <div class="desktop-preview" aria-label="Desktop standings preview">
+                    <div class="preview-topbar">
+                      <span class="preview-app-mark"><img src="./assets/master-league-logo.png" alt=""></span>
+                      <span>MASTER LEAGUE <small>SEASON 2026</small></span>
+                      <span class="preview-status"><i></i> IN PROGRESS</span>
+                    </div>
+                    <div class="preview-content">
+                      <div class="preview-heading"><span>League table</span><span id="preview-week">AFTER WEEK 02</span></div>
+                      <div class="preview-table-head"><span>CLUB</span><span>P</span><span>GD</span><span>PTS</span></div>
+                      <div class="preview-standings" id="preview-standings"></div>
+                      <div class="preview-foot"><span id="preview-match-count">04 MATCHES PLAYED</span><span id="preview-goal-count">06 GOALS SCORED</span></div>
+                    </div>
+                  </div>
+                  <div class="phone-preview" aria-label="Mobile latest result preview">
+                    <div class="phone-camera"></div>
+                    <div class="phone-content">
+                      <span class="phone-kicker">LATEST RESULT</span>
+                      <span class="phone-week" id="phone-week">WEEK 02</span>
+                      <div class="phone-scoreline">
+                        <span class="phone-team"><span class="phone-crest" id="phone-home-crest"></span><b id="phone-home">FC Seirin</b></span>
+                        <strong><span id="phone-home-score">2</span><i>:</i><span id="phone-away-score">2</span></strong>
+                        <span class="phone-team"><span class="phone-crest" id="phone-away-crest"></span><b id="phone-away">Psychoriders</b></span>
+                      </div>
+                      <span class="phone-final">FULL TIME</span>
+                      <div class="phone-mini-stats">
+                        <span><b id="phone-club-count">04</b> CLUBS</span>
+                        <span><b id="phone-goals">06</b> GOALS</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="stat-ribbon" aria-label="Season at a glance">
+                <div class="stat-item"><strong>04</strong><span>Clubs</span></div>
+                <div class="stat-item"><strong>04</strong><span>Matches played</span></div>
+                <div class="stat-item"><strong>06</strong><span>Goals scored</span></div>
+                <div class="stat-item"><strong>00</strong><span>Official assists</span></div>
+              </section>
+            </section>
+
+            <div class="data-grid">
+              <section class="panel results-panel content-section" id="fixtures" aria-labelledby="fixtures-title">
+                <div class="panel-heading">
+                  <div>
+                    <h2 id="fixtures-title">Matchdays</h2>
+                  </div>
+                  <div class="segmented-control" role="group" aria-label="Filter results by week">
+                    <button class="segment-button is-selected" type="button" data-fixture-mode="all" aria-pressed="true">All</button>
+                    <button class="segment-button" type="button" data-fixture-mode="week1" aria-pressed="false">Week 01</button>
+                    <button class="segment-button" type="button" data-fixture-mode="week2" aria-pressed="false">Week 02</button>
+                  </div>
+                </div>
+                <div class="fixture-list" id="fixture-list" aria-live="polite"></div>
+              </section>
+
+              <section class="panel standings-panel content-section" id="standings" aria-labelledby="standings-title">
+                <div class="panel-heading">
+                  <div>
+                    <h2 id="standings-title">League table</h2>
+                  </div>
+                </div>
+                <div class="table-tabs" role="group" aria-label="League statistics">
+                  <button class="table-tab is-selected" type="button" data-table-mode="table" aria-pressed="true">Standings</button>
+                  <button class="table-tab" type="button" data-table-mode="scorers" aria-pressed="false">Scorers</button>
+                  <button class="table-tab" type="button" data-table-mode="assists" aria-pressed="false">Assists</button>
+                  <button class="table-tab" type="button" data-table-mode="contributions" aria-pressed="false">G/A</button>
+                </div>
+                <div class="table-content" id="table-content" aria-live="polite"></div>
+                <p class="table-footnote"><span class="legend-dot" aria-hidden="true"></span> After Week 02</p>
+              </section>
+            </div>
+
+            <section class="bottom-grid" aria-label="League clubs and top scorer">
+              <section class="clubs-section panel content-section" id="clubs" aria-labelledby="clubs-title">
+                <div class="panel-heading">
+                  <div>
+                    <h2 id="clubs-title">Four clubs. One league.</h2>
+                  </div>
+                </div>
+                <div class="club-list" id="club-list"></div>
+              </section>
+
+              <section class="top-scorer panel" aria-labelledby="scorer-title">
+                <h2 id="scorer-title">Leading scorer</h2>
+                <div class="scorer-highlight" id="leading-scorer">
+                  <span class="scorer-number">01</span>
+                  <div><strong>Thomas</strong><span>FC Seirin</span></div>
+                  <span class="goal-count"><strong>03</strong><span>GOALS</span></span>
+                </div>
+                <p class="scorer-note">Bash and Kai2Ray follow with one goal each.</p>
+              </section>
+            </section>
+
+            <section class="panel player-profiles-section content-section" id="players" aria-labelledby="players-title">
+              <div class="panel-heading">
+                <div>
+                  <h2 id="players-title">Player profiles</h2>
+                  <p>Meet the squad and follow each player’s season contribution.</p>
+                </div>
+              </div>
+              <div class="player-profile-grid" id="player-profile-grid"></div>
+            </section>
+
+            <section class="panel totw-section content-section" id="team-of-week" aria-labelledby="totw-title">
+              <div class="panel-heading">
+                <div>
+                  <h2 id="totw-title">Team of the week</h2>
+                  <p id="totw-subtitle">The weekly XI selected by league admins.</p>
+                </div>
+                <span class="totw-formation" id="totw-formation">—</span>
+              </div>
+              <div id="totw-content"></div>
+            </section>
+
+            <section class="panel notifications-section content-section" id="notifications" aria-labelledby="notifications-title">
+              <div class="panel-heading">
+                <div>
+                  <h2 id="notifications-title">Notifications</h2>
+                  <p>League updates stay here, even after you leave the site.</p>
+                </div>
+                <button class="notification-toggle" id="notification-toggle" type="button" role="switch" aria-checked="false" aria-label="League push notifications" disabled>
+                  <svg class="notification-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+                  <span class="notification-toggle-label">Enable push</span>
+                </button>
+              </div>
+              <p class="notification-status" id="notification-status" role="status" aria-live="polite" hidden></p>
+              <div class="notification-list" id="notification-list" aria-live="polite">
+                <p class="public-empty">Loading notifications…</p>
+              </div>
+              <button class="notification-more" id="load-more-notifications" type="button" hidden>Load older notifications</button>
+            </section>
+
+            <section class="panel news-section content-section" id="news" aria-labelledby="news-title">
+              <div class="panel-heading">
+                <div>
+                  <h2 id="news-title">League news</h2>
+                  <p>Updates and announcements from across the league.</p>
+                </div>
+              </div>
+              <div class="news-grid" id="news-grid"></div>
+            </section>
+
+            <section class="join-strip" id="join">
+              <div><strong>Every club, part of the story.</strong><span>Explore the teams competing in the 2026 season.</span></div>
+              <a href="#clubs">Meet the clubs <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16 16 4M6 4h10v10"/></svg></a>
+            </section>
+          </div>
+        </main>
+
+        <footer class="page-footer" id="about">
+          <span>© 2026 MASTER LEAGUE</span>
+          <span>Made for the love of the game.</span>
+          <a href="#home">Back to top <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4m-5.5 5.5L10 4l5.5 5.5"/></svg></a>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

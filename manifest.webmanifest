@@ -1,0 +1,16 @@
+{
+  "name": "Master League",
+  "short_name": "Master League",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fc",
+  "theme_color": "#f7f9fc",
+  "icons": [
+    {
+      "src": "./assets/master-league-logo.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
